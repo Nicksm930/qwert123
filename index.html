@@ -15,19 +15,19 @@
       // On the desktop emulator you have to "right-click" to simulate a tap
       
       import { ARButton } from "https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js";
-
+      import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114/examples/jsm/loaders/GLTFLoader.js';
       let container;
       let camera, scene, renderer;
       let reticle;
       let controller;
-
+      let cubeMesh;
       init();
       animate();
 
       function init() {
         container = document.createElement("div");
         document.body.appendChild(container);
-
+        
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera(
@@ -84,17 +84,33 @@
         if (reticle.visible) {
           // cone added at the point of a hit test
           // replace the next lines to add your own object in space
-          const geometry = new THREE.CylinderBufferGeometry(0, 0.05, 0.2, 32);
-          const material = new THREE.MeshPhongMaterial({
-            color: 0xffffff * Math.random()
-          });
-          const mesh = new THREE.Mesh(geometry, material);
-          
-          // set the position of the cylinder based on where the reticle is          
-          mesh.position.setFromMatrixPosition(reticle.matrix);
-          mesh.quaternion.setFromRotationMatrix(reticle.matrix);
-
-          scene.add(mesh); 
+          let loader = new GLTFLoader();
+          const modelUrl="./fast-food/scene.gltf";
+            console.log(loader)
+            ///loader(modelurl,onload callback,onprogress callback,onerror callback)
+            loader.load(
+                modelUrl,
+                function (gltf){
+                //     gltf.scene.traverse( function ( child ) {
+                //     if ( child.isMesh ) {
+                //         child.geometry.center(); // center here
+                //     }
+                // });
+                    cubeMesh=gltf.scene;
+                    cubeMesh.position.set(-0.06,-0.08,-1);
+                    // cubeMesh.position.x=1;
+                    // cubeMesh.position.y=2;
+                    console.log(cubeMesh,"cubemesh")
+                    console.log(gltf)
+                    scene.add(cubeMesh);
+                },
+                function (event){
+                    console.log(event)
+                }, 
+                function (error){
+                    console.log(error)
+                }
+                )
         }
       }
 
