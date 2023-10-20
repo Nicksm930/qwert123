@@ -10,12 +10,12 @@
   <body>
    <script type="module" src="">
     const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-let xrButton = document.createElement("button");
-document.body.appendChild(xrButton);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    let xrButton = document.createElement("button");
+    document.body.appendChild(xrButton);
 
 if ("xr" in navigator) {
   xrButton.textContent = "Enter AR";
