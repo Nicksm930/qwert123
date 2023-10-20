@@ -8,7 +8,9 @@
     <script src="https://unpkg.com/three.xr.js"></script>
   </head>
   <body>
-   <script type="module" src="">
+   <script type="module">
+    function init(){
+        console.log("1");
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -16,8 +18,9 @@
     document.body.appendChild(renderer.domElement);
     let xrButton = document.createElement("button");
     document.body.appendChild(xrButton);
-
+    console.log("1");
 if ("xr" in navigator) {
+    console.log("1");
   xrButton.textContent = "Enter AR";
   xrButton.addEventListener("click", startXR);
 } else {
@@ -25,16 +28,17 @@ if ("xr" in navigator) {
 }
 
 async function startXR() {
+    console.log("1");
   const xrSession = await navigator.xr.requestSession("immersive-ar");
   xrButton.disabled = true;
-
+  console.log("1");
   // Initialize XR and set up the XRReferenceSpace
   const xrReferenceSpace = await xrSession.requestReferenceSpace("local-floor");
-
+  console.log("1");
   // Create a Three.js XR manager and set the XRReferenceSpace
   const xrButtonNode = new XRButtonNode(xrButton);
   xrButtonNode.setXRReferenceSpace(xrReferenceSpace);
-
+  console.log("1");
   // Start the XRSession with the XRReferenceSpace and a rendering callback
   xrSession.updateRenderState({ baseLayer: new XRWebGLLayer(xrSession, gl) });
   xrSession.requestAnimationFrame(onXRFrame);
@@ -71,6 +75,9 @@ async function onXRFrame(time, xrFrame) {
   xrSession.requestAnimationFrame(onXRFrame);
 }
 
+
+}
+init();
    </script>
   </body>
 </html>
