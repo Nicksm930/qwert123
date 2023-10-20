@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/XRHandModel.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/XRHandModelFactory.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/XRHandMeshLoader.js"></script>
-<script src="https://unpkg.com/three.xr.js"></script>
-
-</head>
-<body>
-    <script type="module" src="">
-        const scene = new THREE.Scene();
+    <script src="https://unpkg.com/three.xr.js"></script>
+  </head>
+  <body>
+   <script type="module" src="">
+    const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -34,7 +29,7 @@ async function startXR() {
   xrButton.disabled = true;
 
   // Initialize XR and set up the XRReferenceSpace
-  const xrReferenceSpace = await xrSession.requestReferenceSpace("local");
+  const xrReferenceSpace = await xrSession.requestReferenceSpace("local-floor");
 
   // Create a Three.js XR manager and set the XRReferenceSpace
   const xrButtonNode = new XRButtonNode(xrButton);
@@ -76,7 +71,6 @@ async function onXRFrame(time, xrFrame) {
   xrSession.requestAnimationFrame(onXRFrame);
 }
 
-
-    </script>
-</body>
+   </script>
+  </body>
 </html>
